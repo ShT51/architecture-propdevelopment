@@ -1,0 +1,43 @@
+# связываем роль cluster-secrets-reader с группой пользователей security-specialists-group
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: cluster-secrets-reader-binding
+subjects:
+  - kind: Group
+    name: security-specialists-group
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: cluster-secrets-reader
+  apiGroup: rbac.authorization.k8s.io
+
+---
+# связываем роль cluster-resource-reader с группой пользователей support-engineers-group
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: cluster-resource-reader-binding
+subjects:
+  - kind: Group
+    name: support-engineers-group
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: cluster-resource-reader
+  apiGroup: rbac.authorization.k8s.io
+
+---
+# связываем роль cluster-admin с группой пользователей devops-engineers-group
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: cluster-admin-binding
+subjects:
+  - kind: Group
+    name: devops-engineers-group
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: cluster-admin
+  apiGroup: rbac.authorization.k8s.io

@@ -1,0 +1,34 @@
+# роль для просмотра секретов
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: cluster-secrets-reader
+rules:
+  - apiGroups: [ "" ]
+    resources: [ "secrets" ]
+    verbs: [ "get", "list", "watch" ]
+
+---
+# роль для просмотра всех ресурсов (кроме секретов)
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: cluster-resource-reader
+rules:
+  - apiGroups: [ "" ]
+    resources: [ "pods" ]
+    verbs: [ "get", "list", "watch", "create", "update", "delete", "patch" ]
+  - apiGroups: [ "*" ]
+    resources: [ "deployments", "pods", "services", "replicasets", "daemonsets", "configmaps" ]
+    verbs: [ "get", "list", "watch" ]
+
+---
+# роль для редактирования всех ресурсов (кроме секретов)
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: cluster-admin
+rules:
+  - apiGroups: [ "*" ]
+    resources: [ "deployments", "pods", "services", "replicasets", "daemonsets", "configmaps" ]
+    verbs: ["get", "list", "watch", "create", "update", "delete", "patch"]
